@@ -44,6 +44,7 @@ class _LoginViewState extends State<LoginView> {
                   CommonTextField(
                     controller: emailController,
                     hintText: "abc@example.com",
+                    ketboardType: TextInputType.emailAddress,
                     validate: (val) {
                       if (val!.isEmpty) {
                         return "Email is Neccessary";

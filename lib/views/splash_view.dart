@@ -28,7 +28,7 @@ class _SplashViewState extends State<SplashView> {
       backgroundColor: AppColors.themeColor,
       body: Center(
         child: AppText(
-          title: 'We-Chat',
+          title: 'WeChat',
           color: AppColors.whiteColor,
           fontWeight: FontWeight.w600,
           size: 28,

@@ -42,16 +42,35 @@ class _HomeViewState extends State<HomeView> {
                 .toList();
             return Padding(
               padding: const EdgeInsets.all(12),
-              child: Column(
-                children: List.generate(users.length, (index) {
-                  DocumentSnapshot userData = users[index];
-                  return userTile(
-                    userData['userName'],
-                    () {
-                      Get.to(() => ChatView());
-                    },
-                  );
-                }),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: List.generate(users.length, (index) {
+                    DocumentSnapshot userData = users[index];
+                    return Column(
+                      children: [
+                        userTile(
+                          userData['userName'],
+                          () {
+                            print(userData['uid']);
+                            Get.to(
+                              () => ChatView(
+                                userName: userData['userName'],
+                                receiverID: userData['uid'],
+                              ),
+                            );
+                          },
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Divider(
+                            thickness: 0,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
+                ),
               ),
             );
           } else {
@@ -72,13 +91,24 @@ class _HomeViewState extends State<HomeView> {
       child: Container(
         margin: EdgeInsets.only(bottom: 8),
         decoration: BoxDecoration(
-          color: AppColors.themeColor,
-          borderRadius: BorderRadius.circular(8),
-        ),
+            // color: AppColors.themeColor,
+            // borderRadius: BorderRadius.circular(8),
+            ),
         child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: AppColors.themeColor,
+            child: Icon(
+              Icons.person,
+              color: Colors.white,
+            ),
+          ),
           title: AppText(
             title: name,
-            color: Colors.white,
+            color: Colors.black,
+          ),
+          subtitle: AppText(
+            title: 'last message',
+            size: 11,
           ),
         ),
       ),

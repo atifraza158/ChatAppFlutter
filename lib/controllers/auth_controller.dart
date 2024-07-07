@@ -9,6 +9,7 @@ String? currentUserUid;
 class AuthController extends GetxController {
   RxBool loader = false.obs;
   String? currentUserName;
+  User? currentUser;
 
   // Login User
   login(String email, String password) async {
@@ -64,5 +65,8 @@ class AuthController extends GetxController {
     });
   }
 
-  
+  getCurrentUser() async {
+    currentUser = await FirebaseAuth.instance.currentUser;
+    return currentUser;
+  }
 }
